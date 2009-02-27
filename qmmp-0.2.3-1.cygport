@@ -1,0 +1,29 @@
+inherit qt4-cmake
+
+DESCRIPTION="Qt4 audio player with XMMS-compatible skinnable interface"
+HOMEPAGE="http://qmmp.ylsoftware.com/"
+SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2"
+PATCH_URI="mirror://portage/media-sound/${PN}/files/${P}-fix-playlist-download.patch
+           mirror://portage/media-sound/${PN}/files/${P}-fix-xspf.patch
+           0.2.3-cmake.patch
+           0.2.3-oss-default.patch
+           0.2.3-un.h.patch
+           0.2.3-exp10.patch"
+
+CYGCMAKE_ARGS="
+	-DUSE_ALSA=FALSE
+	-DUSE_DBUS=TRUE
+	-DUSE_FFMPEG=TRUE
+	-DUSE_FLAC=TRUE
+	-DUSE_JACK=TRUE
+	-DUSE_MAD=TRUE
+	-DUSE_MODPLUG=TRUE
+	-DUSE_MPC=TRUE
+	-DUSE_OSS=TRUE
+	-DUSE_PULSE=FALSE
+	-DUSE_SCROBBLER=TRUE
+	-DUSE_SNDFILE=TRUE
+	-DUSE_SRC=TRUE
+	-DUSE_VORBIS=TRUE
+	-DUSE_WAVPACK=TRUE
+"

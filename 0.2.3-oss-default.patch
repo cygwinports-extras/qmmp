@@ -1,0 +1,11 @@
+--- origsrc/qmmp-0.2.3/src/qmmp/output.cpp	2008-12-02 11:32:45.000000000 -0600
++++ src/qmmp-0.2.3/src/qmmp/output.cpp	2009-02-24 22:15:31.013625000 -0600
+@@ -127,6 +127,8 @@ bool Output::isEnabled(OutputFactory* fa
+     QSettings settings (QDir::homePath() +"/.qmmp/qmmprc", QSettings::IniFormat);
+ #ifdef Q_OS_LINUX
+     return name == settings.value("Output/plugin_file", "libalsa.so").toString();
++#elif defined(Q_OS_CYGWIN)
++    return name == settings.value("Output/plugin_file", "cygoss.dll").toString();
+ #else
+     return name == settings.value("Output/plugin_file", "liboss.so").toString();
+ #endif
