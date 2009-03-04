@@ -1,0 +1,385 @@
+--- origsrc/svn/src/plugins/CommandLineOptions/IncDecVolumeOption/CMakeLists.txt	2009-03-04 02:21:12.000000000 -0600
++++ src/svn/src/plugins/CommandLineOptions/IncDecVolumeOption/CMakeLists.txt	2009-03-04 02:24:17.054750000 -0600
+@@ -46,7 +46,7 @@ QT4_WRAP_CPP(libincdecvolumeoption_MOC_S
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(incdecvolumeoption SHARED ${libincdecvolumeoption_SRCS} ${libincdecvolumeoption_MOC_SRCS} 
++ADD_LIBRARY(incdecvolumeoption MODULE ${libincdecvolumeoption_SRCS} ${libincdecvolumeoption_MOC_SRCS} 
+            ${libincdecvolumeoption_RCC_SRCS})
+ add_dependencies(incdecvolumeoption qmmpui)
+ target_link_libraries(incdecvolumeoption ${QT_LIBRARIES} -lqmmpui -lqmmp)
+--- origsrc/svn/src/plugins/Effect/bs2b/CMakeLists.txt	2009-03-04 02:21:15.000000000 -0600
++++ src/svn/src/plugins/Effect/bs2b/CMakeLists.txt	2009-03-04 02:24:17.070375000 -0600
+@@ -63,7 +63,7 @@ QT4_WRAP_UI(libbs2b_UIS_H ${libbs2b_UIS}
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(BS2B_FOUND)
+-ADD_LIBRARY(bs2b SHARED ${libbs2b_SRCS} ${libbs2b_MOC_SRCS} ${libbs2b_UIS_H}
++ADD_LIBRARY(bs2b MODULE ${libbs2b_SRCS} ${libbs2b_MOC_SRCS} ${libbs2b_UIS_H}
+   ${libbs2b_RCC_SRCS})
+ add_dependencies(bs2b qmmp)
+ target_link_libraries(bs2b ${QT_LIBRARIES} -lqmmp ${BS2B_LDFLAGS} ${BS2B_CFLAGS})
+--- origsrc/svn/src/plugins/Effect/srconverter/CMakeLists.txt	2009-03-04 02:21:16.000000000 -0600
++++ src/svn/src/plugins/Effect/srconverter/CMakeLists.txt	2009-03-04 02:24:17.086000000 -0600
+@@ -61,7 +61,7 @@ QT4_WRAP_UI(libsrconverter_UIS_H ${libsr
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(SAMPLERATE_FOUND)
+-ADD_LIBRARY(srconverter SHARED ${libsrconverter_SRCS} ${libsrconverter_MOC_SRCS} ${libsrconverter_UIS_H}
++ADD_LIBRARY(srconverter MODULE ${libsrconverter_SRCS} ${libsrconverter_MOC_SRCS} ${libsrconverter_UIS_H}
+   ${libsrconverter_RCC_SRCS})
+ add_dependencies(srconverter qmmp)
+ target_link_libraries(srconverter ${QT_LIBRARIES} -lqmmp ${SAMPLERATE_LDFLAGS} ${SAMPLERATE_CFLAGS})
+--- origsrc/svn/src/plugins/FileDialogs/QmmpFileDialog/CMakeLists.txt	2009-03-04 02:21:12.000000000 -0600
++++ src/svn/src/plugins/FileDialogs/QmmpFileDialog/CMakeLists.txt	2009-03-04 02:24:17.086000000 -0600
+@@ -56,7 +56,7 @@ QT4_WRAP_UI(libqmmpfiledialog_UIS_H ${li
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(qmmpfiledialog SHARED ${libqmmpfiledialog_SRCS} ${libqmmpfiledialog_MOC_SRCS} ${libqmmpfiledialog_UIS_H} ${libqmmpfiledialog_RCC_SRCS})
++ADD_LIBRARY(qmmpfiledialog MODULE ${libqmmpfiledialog_SRCS} ${libqmmpfiledialog_MOC_SRCS} ${libqmmpfiledialog_UIS_H} ${libqmmpfiledialog_RCC_SRCS})
+ add_dependencies(qmmpfiledialog qmmpui)
+ target_link_libraries(qmmpfiledialog ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS qmmpfiledialog DESTINATION ${LIB_DIR}/qmmp/FileDialogs)
+--- origsrc/svn/src/plugins/General/hal/CMakeLists.txt	2009-03-04 02:21:18.000000000 -0600
++++ src/svn/src/plugins/General/hal/CMakeLists.txt	2009-03-04 02:24:17.101625000 -0600
+@@ -60,7 +60,7 @@ QT4_WRAP_UI(libhal_UIS_H ${libhal_UIS})
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(hal SHARED ${libhal_SRCS} ${libhal_MOC_SRCS} ${libhal_UIS_H} ${libhal_RCC_SRCS})
++ADD_LIBRARY(hal MODULE ${libhal_SRCS} ${libhal_MOC_SRCS} ${libhal_UIS_H} ${libhal_RCC_SRCS})
+ add_dependencies(hal qmmpui)
+ target_link_libraries(hal ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS hal DESTINATION ${LIB_DIR}/qmmp/General)
+--- origsrc/svn/src/plugins/General/hotkey/CMakeLists.txt	2009-03-04 02:21:17.000000000 -0600
++++ src/svn/src/plugins/General/hotkey/CMakeLists.txt	2009-03-04 02:24:17.117250000 -0600
+@@ -65,7 +65,7 @@ QT4_WRAP_UI(libhotkey_UIS_H ${libhotkey_
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(X11_FOUND)
+-ADD_LIBRARY(hotkey SHARED ${libhotkey_SRCS} ${libhotkey_MOC_SRCS} ${libhotkey_UIS_H} ${libhotkey_RCC_SRCS})
++ADD_LIBRARY(hotkey MODULE ${libhotkey_SRCS} ${libhotkey_MOC_SRCS} ${libhotkey_UIS_H} ${libhotkey_RCC_SRCS})
+ add_dependencies(hotkey qmmpui)
+ target_link_libraries(hotkey ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS hotkey DESTINATION ${LIB_DIR}/qmmp/General)
+--- origsrc/svn/src/plugins/General/lyrics/CMakeLists.txt	2009-03-04 02:21:19.000000000 -0600
++++ src/svn/src/plugins/General/lyrics/CMakeLists.txt	2009-03-04 02:24:17.132875000 -0600
+@@ -62,7 +62,7 @@ QT4_WRAP_UI(liblyrics_UIS_H ${liblyrics_
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(lyrics SHARED ${liblyrics_SRCS} ${liblyrics_MOC_SRCS} ${liblyrics_UIS_H} ${liblyrics_RCC_SRCS})
++ADD_LIBRARY(lyrics MODULE ${liblyrics_SRCS} ${liblyrics_MOC_SRCS} ${liblyrics_UIS_H} ${liblyrics_RCC_SRCS})
+ add_dependencies(lyrics qmmpui)
+ target_link_libraries(lyrics ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS lyrics DESTINATION ${LIB_DIR}/qmmp/General)
+--- origsrc/svn/src/plugins/General/mpris/CMakeLists.txt	2009-03-04 02:21:19.000000000 -0600
++++ src/svn/src/plugins/General/mpris/CMakeLists.txt	2009-03-04 02:24:17.132875000 -0600
+@@ -59,7 +59,7 @@ QT4_WRAP_CPP(libmpris_MOC_SRCS ${libmpri
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(mpris SHARED ${libmpris_SRCS} ${libmpris_MOC_SRCS} ${libmpris_RCC_SRCS})
++ADD_LIBRARY(mpris MODULE ${libmpris_SRCS} ${libmpris_MOC_SRCS} ${libmpris_RCC_SRCS})
+ add_dependencies(mpris qmmpui)
+ target_link_libraries(mpris ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS mpris DESTINATION ${LIB_DIR}/qmmp/General)
+--- origsrc/svn/src/plugins/General/notifier/CMakeLists.txt	2009-03-04 02:21:17.000000000 -0600
++++ src/svn/src/plugins/General/notifier/CMakeLists.txt	2009-03-04 02:24:17.148500000 -0600
+@@ -61,7 +61,7 @@ QT4_WRAP_UI(libnotifier_UIS_H ${libnotif
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(notifier SHARED ${libnotifier_SRCS} ${libnotifier_MOC_SRCS} ${libnotifier_UIS_H} ${libnotifier_RCC_SRCS})
++ADD_LIBRARY(notifier MODULE ${libnotifier_SRCS} ${libnotifier_MOC_SRCS} ${libnotifier_UIS_H} ${libnotifier_RCC_SRCS})
+ add_dependencies(notifier qmmpui)
+ target_link_libraries(notifier ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS notifier DESTINATION ${LIB_DIR}/qmmp/General)
+--- origsrc/svn/src/plugins/General/scrobbler/CMakeLists.txt	2009-03-04 02:21:21.000000000 -0600
++++ src/svn/src/plugins/General/scrobbler/CMakeLists.txt	2009-03-04 02:24:17.148500000 -0600
+@@ -58,7 +58,7 @@ QT4_WRAP_UI(libscrobbler_UIS_H ${libscro
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(scrobbler SHARED ${libscrobbler_SRCS} ${libscrobbler_MOC_SRCS} ${libscrobbler_UIS_H}
++ADD_LIBRARY(scrobbler MODULE ${libscrobbler_SRCS} ${libscrobbler_MOC_SRCS} ${libscrobbler_UIS_H}
+   ${libscrobbler_RCC_SRCS})
+ add_dependencies(scrobbler qmmpui)
+ target_link_libraries(scrobbler ${QT_LIBRARIES} -lqmmpui -lqmmp)
+--- origsrc/svn/src/plugins/General/statusicon/CMakeLists.txt	2009-03-04 02:21:20.000000000 -0600
++++ src/svn/src/plugins/General/statusicon/CMakeLists.txt	2009-03-04 02:24:17.164125000 -0600
+@@ -61,7 +61,7 @@ QT4_WRAP_UI(libstatusicon_UIS_H ${libsta
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(statusicon SHARED ${libstatusicon_SRCS} ${libstatusicon_MOC_SRCS} ${libstatusicon_UIS_H} ${libstatusicon_RCC_SRCS})
++ADD_LIBRARY(statusicon MODULE ${libstatusicon_SRCS} ${libstatusicon_MOC_SRCS} ${libstatusicon_UIS_H} ${libstatusicon_RCC_SRCS})
+ add_dependencies(statusicon qmmpui libqmmp)
+ target_link_libraries(statusicon ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS statusicon DESTINATION ${LIB_DIR}/qmmp/General)
+--- origsrc/svn/src/plugins/Input/aac/CMakeLists.txt	2009-03-04 02:21:04.000000000 -0600
++++ src/svn/src/plugins/Input/aac/CMakeLists.txt	2009-03-04 02:24:17.179750000 -0600
+@@ -94,7 +94,7 @@ QT4_WRAP_UI(libaac_UIS_H ${libaac_UIS})
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(FAAD_FOUND)
+-ADD_LIBRARY(aac SHARED ${libaac_SRCS} ${libaac_MOC_SRCS} ${libaac_UIS_H}
++ADD_LIBRARY(aac MODULE ${libaac_SRCS} ${libaac_MOC_SRCS} ${libaac_UIS_H}
+   ${libaac_RCC_SRCS})
+ add_dependencies(aac qmmp)
+ target_link_libraries(aac ${QT_LIBRARIES} -lqmmp -lfaad ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS})
+--- origsrc/svn/src/plugins/Input/cdaudio/CMakeLists.txt	2009-03-04 02:21:06.000000000 -0600
++++ src/svn/src/plugins/Input/cdaudio/CMakeLists.txt	2009-03-04 02:24:17.179750000 -0600
+@@ -57,7 +57,7 @@ QT4_WRAP_UI(libcdaudio_UIS_H ${libcdaudi
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(CDIO_FOUND)
+-ADD_LIBRARY(cdaudio SHARED ${libcdaudio_SRCS} ${libcdaudio_MOC_SRCS} ${libcdaudio_UIS_H} ${libcdaudio_RCC_SRCS})
++ADD_LIBRARY(cdaudio MODULE ${libcdaudio_SRCS} ${libcdaudio_MOC_SRCS} ${libcdaudio_UIS_H} ${libcdaudio_RCC_SRCS})
+ add_dependencies(cdaudio qmmp)
+ target_link_libraries(cdaudio ${QT_LIBRARIES} -lqmmp ${CDIO_LDFLAGS} ${CDIO_CFLAGS})
+ install(TARGETS cdaudio DESTINATION ${LIB_DIR}/qmmp/Input)
+--- origsrc/svn/src/plugins/Input/cdaudio/decoder_cdaudio.cpp	2009-03-04 02:21:06.000000000 -0600
++++ src/svn/src/plugins/Input/cdaudio/decoder_cdaudio.cpp	2009-03-04 02:40:37.867250000 -0600
+@@ -366,7 +366,7 @@ void DecoderCDAudio::run()
+             m_seekTime = -1.0;
+         }
+ 
+-        lsn_t secorts_to_read = qMin(CDDA_SECTORS, (m_last_sector - m_current_sector + 1));
++        lsn_t secorts_to_read = qMin((long)CDDA_SECTORS, (m_last_sector - m_current_sector + 1));
+         if (secorts_to_read <= 0)
+             len = 0;
+         else
+--- origsrc/svn/src/plugins/Input/cue/CMakeLists.txt	2009-03-04 02:21:08.000000000 -0600
++++ src/svn/src/plugins/Input/cue/CMakeLists.txt	2009-03-04 02:24:17.195375000 -0600
+@@ -59,7 +59,7 @@ QT4_WRAP_UI(libcue_UIS_H ${libcue_UIS})
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(cue SHARED ${libcue_SRCS} ${libcue_MOC_SRCS} ${libcue_RCC_SRCS} ${libcue_UIS_H})
++ADD_LIBRARY(cue MODULE ${libcue_SRCS} ${libcue_MOC_SRCS} ${libcue_RCC_SRCS} ${libcue_UIS_H})
+ add_dependencies(cue qmmp)
+ target_link_libraries(cue ${QT_LIBRARIES} -lqmmp)
+ install(TARGETS cue DESTINATION ${LIB_DIR}/qmmp/Input)
+--- origsrc/svn/src/plugins/Input/ffmpeg/CMakeLists.txt	2009-03-04 02:21:02.000000000 -0600
++++ src/svn/src/plugins/Input/ffmpeg/CMakeLists.txt	2009-03-04 02:24:17.211000000 -0600
+@@ -100,7 +100,7 @@ QT4_WRAP_UI(libffmpeg_UIS_H ${libffmpeg_
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(FFMPEG_FOUND)
+-ADD_LIBRARY(ffmpeg SHARED ${libffmpeg_SRCS} ${libffmpeg_MOC_SRCS} ${libffmpeg_UIS_H}
++ADD_LIBRARY(ffmpeg MODULE ${libffmpeg_SRCS} ${libffmpeg_MOC_SRCS} ${libffmpeg_UIS_H}
+   ${libffmpeg_RCC_SRCS})
+ add_dependencies(ffmpeg qmmp)
+ target_link_libraries(ffmpeg ${QT_LIBRARIES} -lqmmp ${FFMPEG_LDFLAGS} ${FFMPEG_CFLAGS})
+--- origsrc/svn/src/plugins/Input/flac/CMakeLists.txt	2009-03-04 02:21:04.000000000 -0600
++++ src/svn/src/plugins/Input/flac/CMakeLists.txt	2009-03-04 02:24:17.211000000 -0600
+@@ -69,7 +69,7 @@ QT4_WRAP_UI(libflac_UIS_H ${libflac_UIS}
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(FLAC_FOUND)
+-ADD_LIBRARY(flac SHARED ${libflac_SRCS} ${libflac_MOC_SRCS} ${libflac_UIS_H} ${libflac_RCC_SRCS})
++ADD_LIBRARY(flac MODULE ${libflac_SRCS} ${libflac_MOC_SRCS} ${libflac_UIS_H} ${libflac_RCC_SRCS})
+ add_dependencies(flac qmmp)
+ target_link_libraries(flac ${QT_LIBRARIES} -lqmmp ${FLAC_LDFLAGS} ${FLAC_CFLAGS} ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS})
+ install(TARGETS flac DESTINATION ${LIB_DIR}/qmmp/Input)
+--- origsrc/svn/src/plugins/Input/mad/CMakeLists.txt	2009-03-04 02:21:01.000000000 -0600
++++ src/svn/src/plugins/Input/mad/CMakeLists.txt	2009-03-04 02:24:17.226625000 -0600
+@@ -68,7 +68,7 @@ QT4_WRAP_UI(libmad_UIS_H ${libmad_UIS})
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(MAD_FOUND)
+-ADD_LIBRARY(mad SHARED ${libmad_SRCS} ${libmad_MOC_SRCS} ${libmad_UIS_H} ${libmad_RCC_SRCS})
++ADD_LIBRARY(mad MODULE ${libmad_SRCS} ${libmad_MOC_SRCS} ${libmad_UIS_H} ${libmad_RCC_SRCS})
+ add_dependencies(mad qmmp)
+ target_link_libraries(mad ${QT_LIBRARIES} -lqmmp ${MAD_LDFLAGS} ${MAD_CFLAGS} ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS})
+ install(TARGETS mad DESTINATION ${LIB_DIR}/qmmp/Input)
+--- origsrc/svn/src/plugins/Input/modplug/CMakeLists.txt	2009-03-04 02:21:06.000000000 -0600
++++ src/svn/src/plugins/Input/modplug/CMakeLists.txt	2009-03-04 02:24:17.242250000 -0600
+@@ -81,7 +81,7 @@ QT4_WRAP_UI(libmodplug_UIS_H ${libmodplu
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(MODPLUG_FOUND)
+-ADD_LIBRARY(modplug SHARED ${libmodplug_SRCS} ${libmodplug_MOC_SRCS} ${libmodplug_UIS_H}
++ADD_LIBRARY(modplug MODULE ${libmodplug_SRCS} ${libmodplug_MOC_SRCS} ${libmodplug_UIS_H}
+   ${libmodplug_RCC_SRCS})
+ add_dependencies(modplug qmmp)
+ target_link_libraries(modplug ${QT_LIBRARIES} -lqmmp ${MODPLUG_LDFLAGS} ${MODPLUG_CFLAGS})
+--- origsrc/svn/src/plugins/Input/mpc/CMakeLists.txt	2009-03-04 02:21:00.000000000 -0600
++++ src/svn/src/plugins/Input/mpc/CMakeLists.txt	2009-03-04 02:24:17.242250000 -0600
+@@ -65,7 +65,7 @@ QT4_WRAP_UI(libmpc_UIS_H ${libmpc_UIS})
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(MPC_FOUND)
+-ADD_LIBRARY(mpc SHARED ${libmpc_SRCS} ${libmpc_MOC_SRCS} ${libmpc_UIS_H}
++ADD_LIBRARY(mpc MODULE ${libmpc_SRCS} ${libmpc_MOC_SRCS} ${libmpc_UIS_H}
+   ${libmpc_RCC_SRCS})
+ add_dependencies(mpc qmmp)
+ target_link_libraries(mpc ${QT_LIBRARIES} -lqmmp -lmpcdec ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS})
+--- origsrc/svn/src/plugins/Input/mplayer/CMakeLists.txt	2009-03-04 02:21:07.000000000 -0600
++++ src/svn/src/plugins/Input/mplayer/CMakeLists.txt	2009-03-04 02:24:17.257875000 -0600
+@@ -60,7 +60,7 @@ QT4_WRAP_UI(libmplayer_UIS_H ${libmplaye
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(mplayer SHARED ${libmplayer_SRCS} ${libmplayer_MOC_SRCS} ${libmplayer_RCC_SRCS} ${libmplayer_UIS_H})
++ADD_LIBRARY(mplayer MODULE ${libmplayer_SRCS} ${libmplayer_MOC_SRCS} ${libmplayer_RCC_SRCS} ${libmplayer_UIS_H})
+ add_dependencies(mplayer qmmp)
+ target_link_libraries(mplayer ${QT_LIBRARIES} -lqmmp)
+ install(TARGETS mplayer DESTINATION ${LIB_DIR}/qmmp/Input)
+--- origsrc/svn/src/plugins/Input/sndfile/CMakeLists.txt	2009-03-04 02:21:02.000000000 -0600
++++ src/svn/src/plugins/Input/sndfile/CMakeLists.txt	2009-03-04 02:24:17.273500000 -0600
+@@ -53,7 +53,7 @@ QT4_WRAP_CPP(libsndfile_MOC_SRCS ${libsn
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(SNDFILE_FOUND)
+-ADD_LIBRARY(sndfile SHARED ${libsndfile_SRCS} ${libsndfile_MOC_SRCS} ${libsndfile_UIS_H}
++ADD_LIBRARY(sndfile MODULE ${libsndfile_SRCS} ${libsndfile_MOC_SRCS} ${libsndfile_UIS_H}
+   ${libsndfile_RCC_SRCS})
+ add_dependencies(sndfile qmmp)
+ target_link_libraries(sndfile ${QT_LIBRARIES} -lqmmp ${SNDFILE_LDFLAGS} ${SNDFILE_CFLAGS})
+--- origsrc/svn/src/plugins/Input/vorbis/CMakeLists.txt	2009-03-04 02:21:03.000000000 -0600
++++ src/svn/src/plugins/Input/vorbis/CMakeLists.txt	2009-03-04 02:24:17.273500000 -0600
+@@ -62,7 +62,7 @@ QT4_WRAP_UI(libvorbis_UIS_H ${libvorbis_
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(VORBIS_FOUND)
+-ADD_LIBRARY(vorbis SHARED ${libvorbis_SRCS} ${libvorbis_MOC_SRCS} ${libvorbis_UIS_H}
++ADD_LIBRARY(vorbis MODULE ${libvorbis_SRCS} ${libvorbis_MOC_SRCS} ${libvorbis_UIS_H}
+   ${libvorbis_RCC_SRCS})
+ add_dependencies(vorbis qmmp)
+ target_link_libraries(vorbis ${QT_LIBRARIES} -lqmmp ${VORBIS_LDFLAGS} ${VORBIS_CFLAGS} ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS})
+--- origsrc/svn/src/plugins/Input/wavpack/CMakeLists.txt	2009-03-04 02:21:07.000000000 -0600
++++ src/svn/src/plugins/Input/wavpack/CMakeLists.txt	2009-03-04 02:24:17.289125000 -0600
+@@ -64,7 +64,7 @@ QT4_WRAP_UI(libwavpack_UIS_H ${libwavpac
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(WAVPACK_FOUND)
+-ADD_LIBRARY(wavpack SHARED ${libwavpack_SRCS} ${libwavpack_MOC_SRCS} ${libwavpack_UIS_H}
++ADD_LIBRARY(wavpack MODULE ${libwavpack_SRCS} ${libwavpack_MOC_SRCS} ${libwavpack_UIS_H}
+   ${libwavpack_RCC_SRCS})
+ add_dependencies(wavpack qmmp)
+ target_link_libraries(wavpack ${QT_LIBRARIES} -lqmmp ${WAVPACK_LDFLAGS} ${WAVPACK_CLAGS})
+--- origsrc/svn/src/plugins/Output/alsa/CMakeLists.txt	2009-03-04 02:21:09.000000000 -0600
++++ src/svn/src/plugins/Output/alsa/CMakeLists.txt	2009-03-04 02:24:17.304750000 -0600
+@@ -61,7 +61,7 @@ QT4_WRAP_UI(libalsa_UIS_H ${libalsa_UIS}
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(ALSA_FOUND)
+-ADD_LIBRARY(alsa SHARED ${libalsa_SRCS} ${libalsa_MOC_SRCS} ${libalsa_UIS_H}
++ADD_LIBRARY(alsa MODULE ${libalsa_SRCS} ${libalsa_MOC_SRCS} ${libalsa_UIS_H}
+   ${libalsa_RCC_SRCS})
+ add_dependencies(alsa qmmp)
+ target_link_libraries(alsa ${QT_LIBRARIES} -lqmmp ${ALSA_LDFLAGS} ${ALSA_CFLAGS})
+--- origsrc/svn/src/plugins/Output/jack/CMakeLists.txt	2009-03-04 02:21:11.000000000 -0600
++++ src/svn/src/plugins/Output/jack/CMakeLists.txt	2009-03-04 02:24:17.304750000 -0600
+@@ -51,7 +51,7 @@ QT4_WRAP_CPP(libjack_MOC_SRCS ${libjack_
+ 
+ 
+ IF(JACK_FOUND)
+-ADD_LIBRARY(jack SHARED ${libjack_SRCS} ${libjack_MOC_SRCS} ${libjack_RCC_SRCS})
++ADD_LIBRARY(jack MODULE ${libjack_SRCS} ${libjack_MOC_SRCS} ${libjack_RCC_SRCS})
+ add_dependencies(jack qmmp)
+ target_link_libraries(jack ${QT_LIBRARIES} -lqmmp ${JACK_LDFLAGS} ${JACK_CFLAGS})
+ install(TARGETS jack DESTINATION ${LIB_DIR}/qmmp/Output)
+--- origsrc/svn/src/plugins/Output/oss/CMakeLists.txt	2009-03-04 02:21:10.000000000 -0600
++++ src/svn/src/plugins/Output/oss/CMakeLists.txt	2009-03-04 02:24:17.320375000 -0600
+@@ -50,7 +50,7 @@ SET(liboss_UIS
+ 
+ QT4_WRAP_UI(liboss_UIS_H ${liboss_UIS})
+ 
+-ADD_LIBRARY(oss SHARED ${liboss_SRCS} ${liboss_MOC_SRCS} ${liboss_UIS_H}
++ADD_LIBRARY(oss MODULE ${liboss_SRCS} ${liboss_MOC_SRCS} ${liboss_UIS_H}
+   ${liboss_RCC_SRCS})
+ add_dependencies(oss qmmp)
+ target_link_libraries(oss ${QT_LIBRARIES} -lqmmp)
+--- origsrc/svn/src/plugins/Output/pulseaudio/CMakeLists.txt	2009-03-04 02:21:11.000000000 -0600
++++ src/svn/src/plugins/Output/pulseaudio/CMakeLists.txt	2009-03-04 02:24:17.336000000 -0600
+@@ -53,7 +53,7 @@ QT4_WRAP_CPP(libpulseaudio_MOC_SRCS ${li
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ IF(PULSE_FOUND)
+-ADD_LIBRARY(pulseaudio SHARED ${libpulseaudio_SRCS} ${libpulseaudio_MOC_SRCS} ${libpulseaudio_UIS_H}
++ADD_LIBRARY(pulseaudio MODULE ${libpulseaudio_SRCS} ${libpulseaudio_MOC_SRCS} ${libpulseaudio_UIS_H}
+   ${libpulseaudio_RCC_SRCS})
+ add_dependencies(pulseaudio qmmp)
+ target_link_libraries(pulseaudio ${QT_LIBRARIES} -lqmmp ${PULSE_LDFLAGS} ${PULSE_CFLAGS})
+--- origsrc/svn/src/plugins/PlaylistFormats/m3u/CMakeLists.txt	2009-03-04 02:21:22.000000000 -0600
++++ src/svn/src/plugins/PlaylistFormats/m3u/CMakeLists.txt	2009-03-04 02:24:17.336000000 -0600
+@@ -43,7 +43,7 @@ QT4_WRAP_CPP(libm3uplaylistformat_MOC_SR
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(m3uplaylistformat SHARED ${libm3uplaylistformat_SRCS} ${libm3uplaylistformat_MOC_SRCS})
++ADD_LIBRARY(m3uplaylistformat MODULE ${libm3uplaylistformat_SRCS} ${libm3uplaylistformat_MOC_SRCS})
+ add_dependencies(m3uplaylistformat qmmpui)
+ target_link_libraries(m3uplaylistformat ${QT_LIBRARIES} -lqmmpui)
+ install(TARGETS m3uplaylistformat DESTINATION ${LIB_DIR}/qmmp/PlaylistFormats)
+--- origsrc/svn/src/plugins/PlaylistFormats/pls/CMakeLists.txt	2009-03-04 02:21:22.000000000 -0600
++++ src/svn/src/plugins/PlaylistFormats/pls/CMakeLists.txt	2009-03-04 02:24:17.351625000 -0600
+@@ -43,7 +43,7 @@ QT4_WRAP_CPP(libplsplaylistformat_MOC_SR
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(plsplaylistformat SHARED ${libplsplaylistformat_SRCS} ${libplsplaylistformat_MOC_SRCS})
++ADD_LIBRARY(plsplaylistformat MODULE ${libplsplaylistformat_SRCS} ${libplsplaylistformat_MOC_SRCS})
+ add_dependencies(plsplaylistformat qmmpui)
+ target_link_libraries(plsplaylistformat ${QT_LIBRARIES} -lqmmpui)
+ install(TARGETS plsplaylistformat DESTINATION ${LIB_DIR}/qmmp/PlaylistFormats)
+--- origsrc/svn/src/plugins/PlaylistFormats/xspf/CMakeLists.txt	2009-03-04 02:21:21.000000000 -0600
++++ src/svn/src/plugins/PlaylistFormats/xspf/CMakeLists.txt	2009-03-04 02:24:17.367250000 -0600
+@@ -48,7 +48,7 @@ QT4_WRAP_CPP(libxspfplaylistformat_MOC_S
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(xspfplaylistformat SHARED ${libxspfplaylistformat_SRCS} ${libxspfplaylistformat_MOC_SRCS})
++ADD_LIBRARY(xspfplaylistformat MODULE ${libxspfplaylistformat_SRCS} ${libxspfplaylistformat_MOC_SRCS})
+ add_dependencies(xspfplaylistformat qmmpui)
+ target_link_libraries(xspfplaylistformat ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS xspfplaylistformat DESTINATION ${LIB_DIR}/qmmp/PlaylistFormats)
+--- origsrc/svn/src/plugins/Visual/analyzer/CMakeLists.txt	2009-03-04 02:21:14.000000000 -0600
++++ src/svn/src/plugins/Visual/analyzer/CMakeLists.txt	2009-03-04 02:24:17.367250000 -0600
+@@ -60,7 +60,7 @@ QT4_WRAP_UI(libanalyzer_UIS_H ${libanaly
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(analyzer SHARED ${libanalyzer_SRCS} ${libanalyzer_MOC_SRCS} ${libanalyzer_UIS_H}
++ADD_LIBRARY(analyzer MODULE ${libanalyzer_SRCS} ${libanalyzer_MOC_SRCS} ${libanalyzer_UIS_H}
+   ${libanalyzer_RCC_SRCS})
+ add_dependencies(analyzer qmmp)
+ target_link_libraries(analyzer ${QT_LIBRARIES} -lqmmp)
+--- origsrc/svn/src/plugins/Visual/projectm/CMakeLists.txt	2009-03-04 02:21:13.000000000 -0600
++++ src/svn/src/plugins/Visual/projectm/CMakeLists.txt	2009-03-04 02:24:17.382875000 -0600
+@@ -55,7 +55,7 @@ QT4_WRAP_CPP(libprojectm_MOC_SRCS ${libp
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ IF(PROJECTM_FOUND)
+-ADD_LIBRARY(projectm SHARED ${libprojectm_SRCS} ${libprojectm_MOC_SRCS} ${libprojectm_RCC_SRCS})
++ADD_LIBRARY(projectm MODULE ${libprojectm_SRCS} ${libprojectm_MOC_SRCS} ${libprojectm_RCC_SRCS})
+ add_dependencies(projectm qmmp)
+ target_link_libraries(projectm ${QT_LIBRARIES} -lqmmp ${PROJECTM_LDFLAGS} ${PROJECTM_CFLAGS})
+ install(TARGETS projectm DESTINATION ${LIB_DIR}/qmmp/Visual)
+--- origsrc/svn/src/qmmp/CMakeLists.txt	2009-03-04 02:21:25.000000000 -0600
++++ src/svn/src/qmmp/CMakeLists.txt	2009-03-04 02:24:55.726625000 -0600
+@@ -104,5 +104,7 @@ include_directories(${CMAKE_CURRENT_BINA
+ ADD_LIBRARY(libqmmp SHARED ${libqmmp_SRCS} ${libqmmp_MOC_SRCS})
+ target_link_libraries(libqmmp ${QT_LIBRARIES} ${CURL_LDFLAGS} ${CURL_CFLAGS})
+ SET_TARGET_PROPERTIES(libqmmp PROPERTIES VERSION ${QMMP_VERSION} SOVERSION ${QMMP_SOVERSION} OUTPUT_NAME qmmp)
+-install(TARGETS libqmmp LIBRARY DESTINATION ${LIB_DIR})
++install(TARGETS libqmmp LIBRARY DESTINATION ${LIB_DIR}
++                        RUNTIME DESTINATION bin
++                        ARCHIVE DESTINATION ${LIB_DIR})
+ install(FILES ${libqmmp_DEVEL_HDRS} DESTINATION include/qmmp)
+--- origsrc/svn/src/qmmpui/CMakeLists.txt	2009-03-04 02:21:23.000000000 -0600
++++ src/svn/src/qmmpui/CMakeLists.txt	2009-03-04 02:25:24.882875000 -0600
+@@ -90,5 +90,7 @@ ADD_LIBRARY(qmmpui SHARED ${libqmmpui_SR
+ target_link_libraries(qmmpui ${QT_LIBRARIES} -lqmmp)
+ add_dependencies(qmmpui libqmmp)
+ SET_TARGET_PROPERTIES(qmmpui PROPERTIES VERSION ${QMMP_VERSION} SOVERSION ${QMMP_SOVERSION})
+-install(TARGETS qmmpui LIBRARY DESTINATION ${LIB_DIR})
++install(TARGETS qmmpui LIBRARY DESTINATION ${LIB_DIR}
++                       RUNTIME DESTINATION bin
++                       ARCHIVE DESTINATION ${LIB_DIR})
+ install(FILES ${libqmmpui_DEVEL_HDRS} DESTINATION include/qmmpui)
