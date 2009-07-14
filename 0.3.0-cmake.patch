@@ -42,6 +42,17 @@
  add_dependencies(qmmpfiledialog qmmpui)
  target_link_libraries(qmmpfiledialog ${QT_LIBRARIES} -lqmmpui -lqmmp)
  install(TARGETS qmmpfiledialog DESTINATION ${LIB_DIR}/qmmp/FileDialogs)
+--- origsrc/qmmp-0.3.0/src/plugins/General/fileops/CMakeLists.txt	2009-05-11 06:40:42.000000000 -0500
++++ src/qmmp-0.3.0/src/plugins/General/fileops/CMakeLists.txt	2009-07-12 00:15:17.886455400 -0500
+@@ -62,7 +62,7 @@ QT4_WRAP_UI(libfileops_UIS_H ${libfileop
+ # the UI file won't be wrapped!
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+-ADD_LIBRARY(fileops SHARED ${libfileops_SRCS} ${libfileops_MOC_SRCS} ${libfileops_UIS_H} ${libfileops_RCC_SRCS})
++ADD_LIBRARY(fileops MODULE ${libfileops_SRCS} ${libfileops_MOC_SRCS} ${libfileops_UIS_H} ${libfileops_RCC_SRCS})
+ add_dependencies(fileops qmmpui)
+ target_link_libraries(fileops ${QT_LIBRARIES} -lqmmpui -lqmmp)
+ install(TARGETS fileops DESTINATION ${LIB_DIR}/qmmp/General)
 --- origsrc/svn/src/plugins/General/hal/CMakeLists.txt	2009-03-04 02:21:18.000000000 -0600
 +++ src/svn/src/plugins/General/hal/CMakeLists.txt	2009-03-04 02:24:17.101625000 -0600
 @@ -60,7 +60,7 @@ QT4_WRAP_UI(libhal_UIS_H ${libhal_UIS})
@@ -125,11 +136,11 @@
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
  
  IF(FAAD_FOUND)
--ADD_LIBRARY(aac SHARED ${libaac_SRCS} ${libaac_MOC_SRCS} ${libaac_UIS_H}
-+ADD_LIBRARY(aac MODULE ${libaac_SRCS} ${libaac_MOC_SRCS} ${libaac_UIS_H}
-   ${libaac_RCC_SRCS})
+-ADD_LIBRARY(aac SHARED ${libaac_SRCS} ${libaac_MOC_SRCS} ${libaac_UIS_H} ${libaac_RCC_SRCS})
++ADD_LIBRARY(aac MODULE ${libaac_SRCS} ${libaac_MOC_SRCS} ${libaac_UIS_H} ${libaac_RCC_SRCS})
  add_dependencies(aac qmmp)
  target_link_libraries(aac ${QT_LIBRARIES} -lqmmp -lfaad ${TAGLIB_LDFLAGS} ${TAGLIB_CFLAGS})
+ install(TARGETS aac DESTINATION ${LIB_DIR}/qmmp/Input)
 --- origsrc/svn/src/plugins/Input/cdaudio/CMakeLists.txt	2009-03-04 02:21:06.000000000 -0600
 +++ src/svn/src/plugins/Input/cdaudio/CMakeLists.txt	2009-03-04 02:24:17.179750000 -0600
 @@ -57,7 +57,7 @@ QT4_WRAP_UI(libcdaudio_UIS_H ${libcdaudi
@@ -141,17 +152,6 @@
  add_dependencies(cdaudio qmmp)
  target_link_libraries(cdaudio ${QT_LIBRARIES} -lqmmp ${CDIO_LDFLAGS} ${CDIO_CFLAGS})
  install(TARGETS cdaudio DESTINATION ${LIB_DIR}/qmmp/Input)
---- origsrc/svn/src/plugins/Input/cdaudio/decoder_cdaudio.cpp	2009-03-04 02:21:06.000000000 -0600
-+++ src/svn/src/plugins/Input/cdaudio/decoder_cdaudio.cpp	2009-03-04 02:40:37.867250000 -0600
-@@ -366,7 +366,7 @@ void DecoderCDAudio::run()
-             m_seekTime = -1.0;
-         }
- 
--        lsn_t secorts_to_read = qMin(CDDA_SECTORS, (m_last_sector - m_current_sector + 1));
-+        lsn_t secorts_to_read = qMin((long)CDDA_SECTORS, (m_last_sector - m_current_sector + 1));
-         if (secorts_to_read <= 0)
-             len = 0;
-         else
 --- origsrc/svn/src/plugins/Input/cue/CMakeLists.txt	2009-03-04 02:21:08.000000000 -0600
 +++ src/svn/src/plugins/Input/cue/CMakeLists.txt	2009-03-04 02:24:17.195375000 -0600
 @@ -59,7 +59,7 @@ QT4_WRAP_UI(libcue_UIS_H ${libcue_UIS})

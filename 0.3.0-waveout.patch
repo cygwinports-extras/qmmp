@@ -1,0 +1,108 @@
+--- origsrc/qmmp-0.3.0/CMakeLists.txt	2009-07-04 08:41:50.000000000 -0500
++++ src/qmmp-0.3.0/CMakeLists.txt	2009-07-12 01:03:57.015112000 -0500
+@@ -103,6 +103,7 @@ PRINT_SUMMARY ("ALSA support ...........
+ PRINT_SUMMARY ("OSS support ......................." USE_OSS 1)
+ PRINT_SUMMARY ("JACK support ......................" USE_JACK JACK_FOUND)
+ PRINT_SUMMARY ("PulseAudio support ................" USE_PULSE PULSE_FOUND)
++PRINT_SUMMARY ("Win32 Waveout support ............." USE_WAVEOUT WINDOWS_H_FOUND)
+ 
+ MESSAGE("")
+ MESSAGE("Effect Plugins:")
+--- origsrc/qmmp-0.3.0/src/plugins/Output/CMakeLists.txt	2009-06-26 08:30:55.000000000 -0500
++++ src/qmmp-0.3.0/src/plugins/Output/CMakeLists.txt	2009-07-12 00:35:48.087806700 -0500
+@@ -2,6 +2,7 @@ SET(USE_ALSA TRUE CACHE BOOL "enable/dis
+ SET(USE_JACK TRUE CACHE BOOL "enable/disable jack plugin")
+ SET(USE_OSS TRUE CACHE BOOL "enable/disable oss plugin")
+ SET(USE_PULSE TRUE CACHE BOOL "enable/disable pulse audio plugin")
++SET(USE_WAVEOUT TRUE CACHE BOOL "enable/disable Win32 waveout plugin")
+ 
+ IF(USE_ALSA)
+ add_subdirectory(alsa)
+@@ -18,3 +19,7 @@ ENDIF(USE_OSS)
+ IF(USE_PULSE)
+ add_subdirectory(pulseaudio)
+ ENDIF(USE_PULSE)
++
++IF(USE_WAVEOUT)
++add_subdirectory(waveout)
++ENDIF(USE_WAVEOUT)
+--- origsrc/qmmp-0.3.0/src/plugins/Output/waveout/CMakeLists.txt	1969-12-31 18:00:00.000000000 -0600
++++ src/qmmp-0.3.0/src/plugins/Output/waveout/CMakeLists.txt	2009-07-12 00:37:29.785360700 -0500
+@@ -0,0 +1,54 @@
++project(libwaveout)
++
++cmake_minimum_required(VERSION 2.4.7)
++
++if(COMMAND cmake_policy)
++cmake_policy(SET CMP0003 NEW)
++endif(COMMAND cmake_policy)
++
++# qt plugin
++ADD_DEFINITIONS( -Wall )
++ADD_DEFINITIONS(${QT_DEFINITIONS})
++ADD_DEFINITIONS(-DQT_PLUGIN)
++ADD_DEFINITIONS(-DQT_NO_DEBUG)
++ADD_DEFINITIONS(-DQT_SHARED)
++ADD_DEFINITIONS(-DQT_THREAD)
++
++include_directories(${CMAKE_CURRENT_BINARY_DIR})
++
++SET(QT_INCLUDES
++  ${QT_INCLUDES}
++  ${CMAKE_CURRENT_SOURCE_DIR}/../../../
++)
++
++# libqmmp
++include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../)
++link_directories(${CMAKE_CURRENT_BINARY_DIR}/../../../qmmp)
++
++# Win32 waveout
++CHECK_INCLUDE_FILE(windows.h WINDOWS_H_FOUND)
++
++SET(libwaveout_SRCS
++  outputwaveout.cpp
++  outputwaveoutfactory.cpp
++)
++
++SET(libwaveout_MOC_HDRS
++  outputwaveout.h
++  outputwaveoutfactory.h
++)
++
++SET(libwaveout_RCCS translations/translations.qrc)
++
++QT4_ADD_RESOURCES(libwaveout_RCC_SRCS ${libwaveout_RCCS})
++
++QT4_WRAP_CPP(libwaveout_MOC_SRCS ${libwaveout_MOC_HDRS})
++
++
++IF(WINDOWS_H_FOUND)
++ADD_LIBRARY(waveout MODULE ${libwaveout_SRCS} ${libwaveout_MOC_SRCS} ${libwaveout_RCC_SRCS})
++add_dependencies(waveout qmmp)
++target_link_libraries(waveout ${QT_LIBRARIES} -lqmmp -lwinmm)
++install(TARGETS waveout DESTINATION ${LIB_DIR}/qmmp/Output)
++ENDIF(WINDOWS_H_FOUND)
++
+--- origsrc/qmmp-0.3.0/src/plugins/Output/waveout/outputwaveout.h	2009-04-12 15:03:46.000000000 -0500
++++ src/qmmp-0.3.0/src/plugins/Output/waveout/outputwaveout.h	2009-07-12 00:27:02.861280700 -0500
+@@ -23,8 +23,8 @@
+ 
+ #include <QObject>
+ #include <stdio.h>
+-#include <windows.h>
+ #include <qmmp/output.h>
++#include <windows.h>
+ 
+ /**
+     @author Ilya Kotov <forkotov02@hotmail.ru>
+--- origsrc/qmmp-0.3.0/src/plugins/Output/waveout/outputwaveoutfactory.cpp	2009-06-26 08:36:06.000000000 -0500
++++ src/qmmp-0.3.0/src/plugins/Output/waveout/outputwaveoutfactory.cpp	2009-07-12 00:26:38.324655800 -0500
+@@ -30,7 +30,7 @@ const OutputProperties OutputWaveOutFact
+     properties.name = tr("WaveOut Plugin");
+     properties.hasAbout = TRUE;
+     properties.hasSettings = FALSE;
+-    properties.shortName = "waveout"
++    properties.shortName = "waveout";
+     return properties;
+ }
+ 
