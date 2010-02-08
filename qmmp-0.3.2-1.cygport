@@ -3,8 +3,12 @@ inherit qt4-cmake
 DESCRIPTION="Qt4 audio player with XMMS-compatible skinnable interface"
 HOMEPAGE="http://qmmp.ylsoftware.com/"
 SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2"
-PATCH_URI="0.3.0-cmake.patch
-           0.3.0-waveout.patch"
+PATCH_URI="0.3.2-waveout.patch"
+
+PKG_NAMES="${PN} ${PN}-devel"
+PKG_HINTS="setup devel"
+qmmp_CONTENTS="etc/ usr/bin/ usr/lib/qmmp/ usr/share/"
+qmmp_devel_CONTENTS="usr/include/ usr/lib/lib*"
 
 # OSS: http://code.google.com/p/qmmp/issues/detail?id=49
 CYGCMAKE_ARGS="
