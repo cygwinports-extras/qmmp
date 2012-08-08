@@ -1,5 +1,0 @@
-category: Audio
-requires: libavcodec53 libavformat53 libavutil51 libbs2b0 libcddb2 libcdio13 libcdio_cdda1 libcurl4 libfaad2 libFLAC8 libgcc1 libGL1 libgme0 libmad0 libmms0 libmodplug1 libmpcdec7 libprojectM2 libpulse0 libpulse-simple0 libQtCore4 libQtDBus4 libQtGui4 libQtNetwork4 libQtOpenGL4 libQtXml4 libsamplerate0 libsndfile1 libstdc++6 libtag1 libvorbisfile3 libwavpack1 libWildMidi1 libX11_6
-sdesc: "Qt4 audio player with XMMS-like interface"
-ldesc: "The Qt Multimedia Player is a audio player with a user interface 
-similar to WinAmp or XMMS."

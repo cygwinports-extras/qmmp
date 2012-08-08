@@ -1,14 +1,17 @@
 inherit qt4-cmake
 
-DESCRIPTION="Qt4 audio player with XMMS-compatible skinnable interface"
+CATEGORY="Audio"
+SUMMARY="Qt4 audio player with XMMS-compatible skinnable interface"
+DESCRIPTION="The Qt Multimedia Player is a audio player with a user interface
+similar to WinAmp or XMMS."
 HOMEPAGE="http://qmmp.ylsoftware.com/"
 SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2"
 PATCH_URI="0.3.2-waveout.patch"
 
 PKG_NAMES="${PN} ${PN}-devel"
-PKG_HINTS="setup devel"
 qmmp_CONTENTS="etc/ usr/bin/ usr/lib/qmmp/ usr/share/"
-qmmp_devel_CONTENTS="usr/include/ usr/lib/lib*"
+qmmp_devel_SUMMARY="${SUMMARY} (plugin development)"
+qmmp_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
 
 # OSS: http://code.google.com/p/qmmp/issues/detail?id=49
 CYGCMAKE_ARGS="
@@ -16,4 +19,5 @@ CYGCMAKE_ARGS="
 	-DUSE_JACK=FALSE
 	-DUSE_HAL=FALSE
 	-DUSE_OSS=FALSE
+	-DUSE_OSS4=FALSE
 "

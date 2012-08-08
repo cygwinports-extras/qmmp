@@ -1,6 +1,0 @@
-category: Audio
-requires: qmmp libQtCore4-devel libQtGui4-devel
-external-source: qmmp
-sdesc: "Qt4 audio player with XMMS-like interface (plugin development)"
-ldesc: "The Qt Multimedia Player is a audio player with a user interface 
-similar to WinAmp or XMMS."
