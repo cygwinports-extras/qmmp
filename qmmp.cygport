@@ -1,5 +1,8 @@
 inherit qt4-cmake
 
+NAME="qmmp"
+VERSION=0.6.6
+RELEASE=1
 CATEGORY="Audio"
 SUMMARY="Qt4 audio player with XMMS-compatible skinnable interface"
 DESCRIPTION="The Qt Multimedia Player is a audio player with a user interface
