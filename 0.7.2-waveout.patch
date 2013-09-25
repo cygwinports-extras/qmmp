@@ -1,0 +1,13 @@
+--- origsrc/qmmp-0.7.2/src/plugins/Output/waveout/outputwaveout.h	2013-08-26 13:02:12.000000000 -0500
++++ src/qmmp-0.7.2/src/plugins/Output/waveout/outputwaveout.h	2013-09-24 20:45:19.495153000 -0500
+@@ -22,9 +22,9 @@
+ #define OUTPUTWAVEOUT_H
+ 
+ #include <stdio.h>
+-#include <windows.h>
+ #include <qmmp/volume.h>
+ #include <qmmp/output.h>
++#include <windows.h>
+ 
+ /**
+     @author Ilya Kotov <forkotov02@hotmail.ru>
