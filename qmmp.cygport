@@ -1,7 +1,7 @@
 inherit qt4-cmake
 
 NAME="qmmp"
-VERSION=0.7.5
+VERSION=0.8.4
 RELEASE=1
 CATEGORY="Audio"
 SUMMARY="Qt4 audio player with XMMS-compatible skinnable interface"
@@ -19,6 +19,7 @@ qmmp_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
 # OSS: http://code.google.com/p/qmmp/issues/detail?id=49
 CYGCMAKE_ARGS="
 	-DUSE_ALSA=FALSE
+	-DUSE_DSOUND=FALSE
 	-DUSE_JACK=FALSE
 	-DUSE_HAL=FALSE
 	-DUSE_OSS=FALSE
