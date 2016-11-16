@@ -1,0 +1,80 @@
+--- origsrc/qmmp-0.10.5/src/plugins/Output/directsound/CMakeLists.txt	2016-11-08 23:56:22.000000000 -0600
++++ src/qmmp-0.10.5/src/plugins/Output/directsound/CMakeLists.txt	2016-11-16 03:30:25.398788700 -0600
+@@ -46,7 +46,7 @@ QT4_ADD_RESOURCES(libdirectsound_RCC_SRC
+ IF(DSOUND_H_FOUND)
+ ADD_LIBRARY(directsound MODULE ${libdirectsound_SRCS} ${libdirectsound_RCC_SRCS} ${libdirectsound_HDRS})
+ add_dependencies(directsound qmmp)
+-target_link_libraries(directsound ${QT_LIBRARIES} libqmmp -ldxguid -lstrmiids -ldmoguids -lmsdmo -lole32 -loleaut32 -luuid -lgdi32 -ldsound)
++target_link_libraries(directsound ${QT_LIBRARIES} libqmmp -ldxguid -lksguid -lstrmiids -ldmoguids -lmsdmo -lole32 -loleaut32 -luuid -lgdi32 -ldsound)
+ install(TARGETS directsound DESTINATION ${LIB_DIR}/qmmp/Output)
+ ENDIF(DSOUND_H_FOUND)
+ 
+--- origsrc/qmmp-0.10.5/src/plugins/Output/directsound/outputdirectsound.cpp	2016-11-08 23:56:22.000000000 -0600
++++ src/qmmp-0.10.5/src/plugins/Output/directsound/outputdirectsound.cpp	2016-11-16 03:24:01.800560800 -0600
+@@ -304,7 +304,7 @@ DWORD OutputDirectSound::bytesToWrite()
+ {
+     DWORD dsCurrentPlayCursor = 0;
+     m_dsBuffer->GetCurrentPosition((DWORD*)&dsCurrentPlayCursor, 0);
+-    long available = dsCurrentPlayCursor - m_dsBufferAt; //available bytes
++    LONG available = dsCurrentPlayCursor - m_dsBufferAt; //available bytes
+ 
+     if(available < 0)
+     {
+@@ -356,7 +356,7 @@ VolumeSettings VolumeDirectSound::volume
+     VolumeSettings vol;
+     if(OutputDirectSound::instance && OutputDirectSound::instance->secondaryBuffer())
+     {
+-        long v = 0;
++        LONG v = 0;
+         double voldB = 0, pandB = 0;
+         OutputDirectSound::instance->secondaryBuffer()->GetVolume(&v);
+         voldB = v / 100.0;
+--- origsrc/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.cpp	2016-11-16 13:08:27.543246400 -0600
++++ src/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.cpp	2016-11-16 03:45:19.307201900 -0600
+@@ -38,7 +38,7 @@ static WAVEHDR*          PlayedWaveHeade
+ 
+ 
+ 
+-static void CALLBACK wave_callback (HWAVE hWave, UINT uMsg, DWORD dwInstance, DWORD dwParam1, DWORD dwParam2)
++static void CALLBACK wave_callback (HWAVEOUT hWave, UINT uMsg, DWORD_PTR dwInstance, DWORD_PTR dwParam1, DWORD_PTR dwParam2)
+ {
+     Q_UNUSED(hWave);
+     Q_UNUSED(dwInstance);
+@@ -98,11 +98,11 @@ bool OutputWaveOut::initialize(quint32 f
+     fmt.wFormatTag = WAVE_FORMAT_PCM;
+     fmt.wBitsPerSample  = 16;
+     fmt.nChannels       = map.count();
+-    fmt.nSamplesPerSec  = (unsigned long)(freq);
++    fmt.nSamplesPerSec  = (ULONG)(freq);
+     fmt.nBlockAlign     = fmt.nChannels * fmt.wBitsPerSample/8;
+     fmt.nAvgBytesPerSec = fmt.nSamplesPerSec * fmt.nChannels * fmt.wBitsPerSample/8;
+ 
+-    switch (waveOutOpen (&dev, deviceID, &fmt, (DWORD)wave_callback, 0, CALLBACK_FUNCTION))
++    switch (waveOutOpen (&dev, deviceID, &fmt, (DWORD_PTR)wave_callback, 0, CALLBACK_FUNCTION))
+     {
+     case MMSYSERR_ALLOCATED:
+         qWarning("OutputWaveOut: Device is already open.");
+@@ -260,8 +260,8 @@ VolumeSettings VolumeWaveOut::volume() c
+     VolumeSettings vol;
+     DWORD data;
+     waveOutGetVolume(0, (PDWORD)&data);
+-    vol.left = (long)LOWORD(data) * 100 / 0xFFFF + 1;
+-    vol.right = (long)HIWORD(data) * 100 / 0xFFFF + 1;
++    vol.left = (LONG)LOWORD(data) * 100 / 0xFFFF + 1;
++    vol.right = (LONG)HIWORD(data) * 100 / 0xFFFF + 1;
+     return vol;
+ }
+ 
+--- origsrc/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.h	2016-11-16 13:08:27.543246400 -0600
++++ src/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.h	2016-11-16 03:08:06.179599000 -0600
+@@ -22,9 +22,9 @@
+ #define OUTPUTWAVEOUT_H
+ 
+ #include <stdio.h>
+-#include <windows.h>
+ #include <qmmp/volume.h>
+ #include <qmmp/output.h>
++#include <windows.h>
+ 
+ /**
+     @author Ilya Kotov <forkotov02@hotmail.ru>

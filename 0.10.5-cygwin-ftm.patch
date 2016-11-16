@@ -1,0 +1,10 @@
+--- origsrc/qmmp-0.10.5/src/plugins/Ui/skinned/symboldisplay.cpp	2016-11-08 23:56:21.000000000 -0600
++++ src/qmmp-0.10.5/src/plugins/Ui/skinned/symboldisplay.cpp	2016-11-16 03:22:47.501589800 -0600
+@@ -17,6 +17,7 @@
+  *   Free Software Foundation, Inc.,                                       *
+  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
+  ***************************************************************************/
++#define _GNU_SOURCE
+ #include <QPainter>
+ #include <math.h>
+ #include "skin.h"
