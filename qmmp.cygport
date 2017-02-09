@@ -1,7 +1,7 @@
-inherit qt4-cmake
+inherit cmake qt5
 
 NAME="qmmp"
-VERSION=0.10.5
+VERSION=1.1.7
 RELEASE=1
 CATEGORY="Audio"
 SUMMARY="Qt4 audio player with XMMS-compatible skinnable interface"
@@ -11,7 +11,7 @@ HOMEPAGE="http://qmmp.ylsoftware.com/"
 SRC_URI="http://qmmp.ylsoftware.com/files/qmmp-${VERSION}.tar.bz2"
 PATCH_URI="
 	0.10.5-cygwin-ftm.patch
-	0.10.5-w32api.patch
+	1.1.7-w32api.patch
 "
 
 PKG_NAMES="qmmp qmmp-devel"

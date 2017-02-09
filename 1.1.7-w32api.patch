@@ -1,16 +1,16 @@
---- origsrc/qmmp-0.10.5/src/plugins/Output/directsound/CMakeLists.txt	2016-11-08 23:56:22.000000000 -0600
-+++ src/qmmp-0.10.5/src/plugins/Output/directsound/CMakeLists.txt	2016-11-16 03:30:25.398788700 -0600
-@@ -46,7 +46,7 @@ QT4_ADD_RESOURCES(libdirectsound_RCC_SRC
+--- origsrc/qmmp-1.1.7/src/plugins/Output/directsound/CMakeLists.txt	2017-02-04 07:02:51.000000000 -0600
++++ src/qmmp-1.1.7/src/plugins/Output/directsound/CMakeLists.txt	2017-02-08 15:40:43.571569500 -0600
+@@ -32,7 +32,7 @@ QT5_ADD_RESOURCES(libdirectsound_RCC_SRC
  IF(DSOUND_H_FOUND)
  ADD_LIBRARY(directsound MODULE ${libdirectsound_SRCS} ${libdirectsound_RCC_SRCS} ${libdirectsound_HDRS})
  add_dependencies(directsound qmmp)
--target_link_libraries(directsound ${QT_LIBRARIES} libqmmp -ldxguid -lstrmiids -ldmoguids -lmsdmo -lole32 -loleaut32 -luuid -lgdi32 -ldsound)
-+target_link_libraries(directsound ${QT_LIBRARIES} libqmmp -ldxguid -lksguid -lstrmiids -ldmoguids -lmsdmo -lole32 -loleaut32 -luuid -lgdi32 -ldsound)
+-target_link_libraries(directsound Qt5::Widgets -lqmmp -ldxguid -lstrmiids -ldmoguids -lmsdmo -lole32 -loleaut32 -luuid -lgdi32 -ldsound)
++target_link_libraries(directsound Qt5::Widgets -lqmmp -ldxguid -lksguid -lstrmiids -ldmoguids -lmsdmo -lole32 -loleaut32 -luuid -lgdi32 -ldsound)
  install(TARGETS directsound DESTINATION ${LIB_DIR}/qmmp/Output)
  ENDIF(DSOUND_H_FOUND)
  
---- origsrc/qmmp-0.10.5/src/plugins/Output/directsound/outputdirectsound.cpp	2016-11-08 23:56:22.000000000 -0600
-+++ src/qmmp-0.10.5/src/plugins/Output/directsound/outputdirectsound.cpp	2016-11-16 03:24:01.800560800 -0600
+--- origsrc/qmmp-1.1.7/src/plugins/Output/directsound/outputdirectsound.cpp	2017-02-04 07:02:51.000000000 -0600
++++ src/qmmp-1.1.7/src/plugins/Output/directsound/outputdirectsound.cpp	2017-02-08 15:40:43.594071900 -0600
 @@ -304,7 +304,7 @@ DWORD OutputDirectSound::bytesToWrite()
  {
      DWORD dsCurrentPlayCursor = 0;
@@ -29,8 +29,19 @@
          double voldB = 0, pandB = 0;
          OutputDirectSound::instance->secondaryBuffer()->GetVolume(&v);
          voldB = v / 100.0;
---- origsrc/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.cpp	2016-11-16 13:08:27.543246400 -0600
-+++ src/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.cpp	2016-11-16 03:45:19.307201900 -0600
+--- origsrc/qmmp-1.1.7/src/plugins/Output/directsound/outputdirectsoundfactory.cpp	2017-02-04 07:02:51.000000000 -0600
++++ src/qmmp-1.1.7/src/plugins/Output/directsound/outputdirectsoundfactory.cpp	2017-02-08 15:54:50.059958800 -0600
+@@ -19,6 +19,8 @@
+  ***************************************************************************/
+ 
+ 
++#include <QMessageBox>
++#include <QTranslator>
+ #include "outputdirectsound.h"
+ #include "outputdirectsoundfactory.h"
+ 
+--- origsrc/qmmp-1.1.7/src/plugins/Output/waveout/outputwaveout.cpp	2017-02-04 07:02:51.000000000 -0600
++++ src/qmmp-1.1.7/src/plugins/Output/waveout/outputwaveout.cpp	2017-02-08 15:40:43.618074700 -0600
 @@ -38,7 +38,7 @@ static WAVEHDR*          PlayedWaveHeade
  
  
@@ -65,8 +76,8 @@
      return vol;
  }
  
---- origsrc/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.h	2016-11-16 13:08:27.543246400 -0600
-+++ src/qmmp-0.10.5/src/plugins/Output/waveout/outputwaveout.h	2016-11-16 03:08:06.179599000 -0600
+--- origsrc/qmmp-1.1.7/src/plugins/Output/waveout/outputwaveout.h	2017-02-04 07:02:51.000000000 -0600
++++ src/qmmp-1.1.7/src/plugins/Output/waveout/outputwaveout.h	2017-02-08 15:40:43.633577600 -0600
 @@ -22,9 +22,9 @@
  #define OUTPUTWAVEOUT_H
  
@@ -78,3 +89,14 @@
  
  /**
      @author Ilya Kotov <forkotov02@hotmail.ru>
+--- origsrc/qmmp-1.1.7/src/plugins/Output/waveout/outputwaveoutfactory.cpp	2017-02-04 07:02:51.000000000 -0600
++++ src/qmmp-1.1.7/src/plugins/Output/waveout/outputwaveoutfactory.cpp	2017-02-08 15:53:30.738998100 -0600
+@@ -19,6 +19,8 @@
+  ***************************************************************************/
+ 
+ 
++#include <QMessageBox>
++#include <QTranslator>
+ #include "outputwaveout.h"
+ #include "outputwaveoutfactory.h"
+ 
