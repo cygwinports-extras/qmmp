@@ -15,6 +15,8 @@ PATCH_URI="
 "
 
 PKG_NAMES="qmmp qmmp-devel"
+# for src/plugins/General/converter
+qmmp_REQUIRES="flac lame opus-tools vorbis-tools wavpack"
 qmmp_CONTENTS="etc/ usr/bin/ usr/lib/qmmp/ usr/share/"
 qmmp_devel_SUMMARY="${SUMMARY} (plugin development)"
 qmmp_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
