@@ -2,7 +2,7 @@ inherit cmake qt5
 
 NAME="qmmp"
 VERSION=1.1.12
-RELEASE=1
+RELEASE=2
 CATEGORY="Audio"
 SUMMARY="Qt4 audio player with XMMS-compatible skinnable interface"
 DESCRIPTION="The Qt Multimedia Player is a audio player with a user interface
